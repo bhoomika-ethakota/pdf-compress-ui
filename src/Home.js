@@ -36,7 +36,7 @@ function Home() {
     event.preventDefault()
     console.log("button clicked")
     setLoading(true)
-    const response = await fetch("http://localhost:5125/upload"); //default is get. Getting the preassigned url
+    const response = await fetch("https://api-pdfc.vercel.app/upload"); //default is get. Getting the preassigned url
     const { url, key } = await response.json(); //storing the  preassigned url and the key 
     const uploadResponse = await fetch(url, {  
       method: "PUT", // this url endpoint is attached to the code where the aws account is linked to upload the file in S3 on put command
@@ -47,7 +47,7 @@ function Home() {
     });
 
     const poll = setInterval(async () => {
-      const res = await axios.post('http://localhost:5125/check', {name: key})
+      const res = await axios.post('https://api-pdfc.vercel.app/check', {name: key})
       console.log(res)
       if (res.data.completed) {
         setLoading(false)
